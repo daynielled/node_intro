@@ -1,14 +1,15 @@
 const fs = require('fs');
 const axios = require('axios')
+const process = require('process');
 
 function cat(path) {
-    // Read the file with the specified path
+    
     fs.readFile(path, 'utf8', (err, data) => {
       if (err) {
         console.error(`Error reading file: ${err.message}`);
         process.exit(1);
       } else {
-        // Print the contents of the file
+        
         console.log(data);
         process.exit(0);
       }
@@ -26,4 +27,18 @@ function cat(path) {
     }
   }
 
-  
+if (process.argv.length < 3) {
+     console.error('Please provide a file path or URL as a command line argument.');
+    process.exit(1);
+  }else{
+     
+    const argument = process.argv[2];
+
+    
+    if (argument.startsWith('http://') || argument.startsWith('https://')) {
+    
+  } else {
+    
+    cat(argument);
+  }
+}
